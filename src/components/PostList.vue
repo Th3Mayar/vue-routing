@@ -1,5 +1,4 @@
 <script>
-const api = process.env.VUE_APP_API_URL;
 export default {
   name: "PostList",
   data() {
@@ -8,8 +7,7 @@ export default {
     };
   },
   async mounted() {
-    // await fetch("https://jsonplaceholder.typicode.com/posts")
-    await fetch(`${api}/posts`)
+    await fetch("https://jsonplaceholder.typicode.com/posts")
       .then((response) => response.json())
       .then((data) => {
         this.posts = data;
