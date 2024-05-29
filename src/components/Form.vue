@@ -34,12 +34,12 @@ export default {
   methods: {
     async submitForm() {
       try {
-        const response = await axios.post("http://localhost:3000/messages", {
+        const url = "https://api-routing-vue.vercel.app/messages";
+        // console.log("Submitting to URL:", url);
+        const response = await axios.post(url, {
           email: this.email,
           message: this.message,
         });
-
-        // console.log(response.data.message);
 
         if (response.status === 200) {
           this.email = "";
