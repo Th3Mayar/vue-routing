@@ -47,7 +47,7 @@
         </svg>
       </div>
     </div>
-    <button class="button-confirm">Let`s go →</button>
+    <button class="button-confirm" onclick="">Let`s go →</button>
   </form>
 </template>
 
