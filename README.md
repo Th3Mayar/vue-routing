@@ -1,4 +1,4 @@
-# vue-routing
+# Vue Routing
 
 ## Project setup
 ```
