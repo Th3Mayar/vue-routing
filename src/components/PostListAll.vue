@@ -7,7 +7,12 @@
         <th>Title</th>
         <th>Body</th>
       </tr>
-      <tr v-for="post in filteredPosts" :key="post.id" class="data">
+      <tr
+        v-for="post in posts"
+        :key="post.id"
+        class="data"
+        @click="viewPostDetail(post.id)"
+      >
         <td>{{ post.id }}</td>
         <td>{{ post.userId }}</td>
         <td>{{ post.title }}</td>
@@ -18,7 +23,7 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 export default {
@@ -26,7 +31,6 @@ export default {
   setup() {
     const posts = ref([]);
     const router = useRouter();
-    const routeParams = computed(() => router.currentRoute.value.params);
 
     const fetchPosts = async () => {
       try {
@@ -44,14 +48,15 @@ export default {
       }
     };
 
-    const filteredPosts = computed(() => {
-      const postId = Number(routeParams.value.id);
-      return posts.value.filter((post) => post.id === postId);
-    });
+    const viewPostDetail = (postId) => {
+      router.push({ name: "post", params: { id: postId } });
+    };
+
+    const filteredPost = ref(null);
 
     fetchPosts();
 
-    return { filteredPosts };
+    return { posts, viewPostDetail };
   },
 };
 </script>
@@ -100,7 +105,6 @@ tr:nth-child(even) {
 }
 
 /* Responsive */
-
 @media (max-width: 600px) {
   table {
     border: 0;
@@ -145,6 +149,5 @@ tr:nth-child(even) {
     border-bottom: 0;
   }
 }
-
 /* End Responsive */
 </style>

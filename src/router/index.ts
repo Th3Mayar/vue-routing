@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import PostsView from "../views/PostsView.vue";
+import PostListAllViewVue from "@/views/PostListAllView.vue";
 import AboutViewVue from "../views/AboutView.vue";
 import SocialViewVue from "../views/SocialView.vue";
 import ContactViewVue from "../views/ContactView.vue";
@@ -19,7 +20,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/posts",
     name: "posts",
-    component: PostsView,
+    component: PostListAllViewVue,
   },
   {
     path: "/social",
@@ -35,7 +36,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/post/:id",
     name: "post",
     component: PostsView,
-    props: true, // Permite pasar los parámetros de ruta como props al componente
+    props: true,
   },
 ];
 
