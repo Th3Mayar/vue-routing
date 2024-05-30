@@ -127,7 +127,7 @@ export default {
   display: block;
   position: relative;
   max-width: 300px;
-  max-height: 320px;
+  max-height: max-content;
   background-color: #f2f8f9;
   border-radius: 10px;
   padding: 2em 1.2em;
