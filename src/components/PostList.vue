@@ -1,19 +1,16 @@
 <template>
   <div class="content">
-    <table>
-      <tr class="header">
-        <th>Id</th>
-        <th>UserName</th>
-        <th>Title</th>
-        <th>Body</th>
-      </tr>
-      <tr v-for="post in filteredPosts" :key="post.id" class="data">
-        <td>{{ post.id }}</td>
-        <td>{{ post.userName }}</td>
-        <td>{{ post.title }}</td>
-        <td>{{ post.body }}</td>
-      </tr>
-    </table>
+    <div class="card data" v-for="post in filteredPosts" :key="post.id">
+      <p class="card-id">{{ post.id }}</p>
+      <p class="card-title">{{ post.title }}</p>
+      <p class="small-desc">
+        {{ post.body }}
+      </p>
+      <p class="name">By {{ post.userName }}</p>
+      <div class="go-corner">
+        <div class="go-arrow">→</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -81,93 +78,115 @@ export default {
 
 <style scoped>
 .content {
+  display: flex;
   border-top: 1px solid #000;
   border-right: 1px solid #000;
+  justify-content: center;
+  align-items: center;
+}
+.card-title {
+  color: #262626;
+  font-size: 1.5em;
+  line-height: normal;
+  font-weight: 700;
+  margin-bottom: 0.5em;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+.small-desc {
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.5em;
+  color: #452c2c;
 }
 
-th,
-td {
-  border: 1px solid #fff;
-  padding: 8px;
+.small-desc {
+  font-size: 1em;
+}
+
+.go-corner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  overflow: hidden;
+  top: 0;
+  right: 0;
+  background: linear-gradient(135deg, #6293c8, #384c6c);
+  border-radius: 0 4px 0 32px;
+}
+
+.go-arrow {
+  margin-top: -4px;
+  margin-right: -4px;
+  color: white;
+  font-family: courier, sans;
+}
+
+.card {
+  display: block;
+  position: relative;
+  max-width: 300px;
+  max-height: 320px;
+  background-color: #f2f8f9;
+  border-radius: 10px;
+  padding: 2em 1.2em;
+  margin: 12px;
+  text-decoration: none;
+  z-index: 0;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #c3e6ec, #a7d1d9);
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: capitalize;
+}
+
+.card:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -16px;
+  right: -16px;
+  background: linear-gradient(135deg, #364a60, #384c6c);
+  height: 32px;
+  width: 32px;
+  border-radius: 32px;
+  transform: scale(1);
+  transform-origin: 50% 50%;
+  transition: transform 0.35s ease-out;
+}
+
+.card:hover:before {
+  transform: scale(28);
+}
+
+.card:hover .small-desc {
+  transition: all 0.5s ease-out;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.card:hover .card-title {
+  transition: all 0.5s ease-out;
+  color: #ffffff;
+}
+
+.name {
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.5em;
+  color: #b88080;
+  margin-top: 2em;
+  text-align: right;
+  font-weight: bold;
+}
+
+.card-id {
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.5em;
+  color: #b88080;
+  margin-top: -1rem;
   text-align: left;
+  font-weight: bold;
 }
-
-th {
-  background-color: #2c3e50;
-  color: #ffff;
-}
-
-tr:nth-child(even) {
-  background-color: #494949;
-}
-
-.header {
-  align-items: center;
-}
-
-.header th {
-  text-align: center;
-}
-
-.data {
-  align-items: center;
-}
-
-.data td {
-  text-align: center;
-}
-
-/* Responsive */
-
-@media (max-width: 600px) {
-  table {
-    border: 0;
-  }
-
-  table caption {
-    font-size: 1.3em;
-  }
-
-  table thead {
-    border: none;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
-
-  table tr {
-    border-bottom: 3px solid #ddd;
-    display: block;
-    margin-bottom: 0.625em;
-  }
-
-  table td {
-    border-bottom: 1px solid #ddd;
-    display: block;
-    font-size: 0.8em;
-    text-align: right;
-  }
-
-  table td::before {
-    content: attr(data-label);
-    float: left;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-
-  table td:last-child {
-    border-bottom: 0;
-  }
-}
-
-/* End Responsive */
 </style>

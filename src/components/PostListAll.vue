@@ -52,7 +52,7 @@ export default {
       router.push({ name: "post", params: { id: postId } });
     };
 
-    const filteredPost = ref(null);
+    // const filteredPost = ref(null);
 
     fetchPosts();
 

@@ -1,6 +1,6 @@
 <template>
-  <div class="posts">
-    <h1>This is an post list page</h1>
+  <div class="post">
+    <h1>This is an post</h1>
     <PostsList />
   </div>
 </template>
