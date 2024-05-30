@@ -3,13 +3,13 @@
     <table>
       <tr class="header">
         <th>Id</th>
-        <th>UserId</th>
+        <th>UserName</th>
         <th>Title</th>
         <th>Body</th>
       </tr>
       <tr v-for="post in filteredPosts" :key="post.id" class="data">
         <td>{{ post.id }}</td>
-        <td>{{ post.userId }}</td>
+        <td>{{ post.userName }}</td>
         <td>{{ post.title }}</td>
         <td>{{ post.body }}</td>
       </tr>
@@ -25,6 +25,7 @@ export default {
   name: "PostList",
   setup() {
     const posts = ref([]);
+    const users = ref([]);
     const router = useRouter();
     const routeParams = computed(() => router.currentRoute.value.params);
 
@@ -44,12 +45,34 @@ export default {
       }
     };
 
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/users"
+        );
+        if (response.ok) {
+          const data = await response.json();
+          users.value = data;
+        } else {
+          console.error("Failed to fetch users:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
     const filteredPosts = computed(() => {
       const postId = Number(routeParams.value.id);
-      return posts.value.filter((post) => post.id === postId);
+      return posts.value
+        .filter((post) => (postId ? post.id === postId : true))
+        .map((post) => {
+          const user = users.value.find((user) => user.id === post.userId);
+          return { ...post, userName: user ? user.name : "Unknown" };
+        });
     });
 
     fetchPosts();
+    fetchUsers();
 
     return { filteredPosts };
   },
