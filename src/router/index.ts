@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import PostsView from "../views/PostsView.vue";
+import AboutViewVue from "../views/AboutView.vue";
+import SocialViewVue from "../views/SocialView.vue";
+import ContactViewVue from "../views/ContactView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -10,29 +14,28 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/about",
     name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    component: AboutViewVue,
   },
   {
     path: "/posts",
     name: "posts",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/PostsView.vue"),
+    component: PostsView,
   },
   {
     path: "/social",
     name: "social",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/SocialView.vue"),
+    component: SocialViewVue,
   },
   {
     path: "/contact",
     name: "contact",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/ContactView.vue"),
+    component: ContactViewVue,
+  },
+  {
+    path: "/post/:id",
+    name: "post",
+    component: PostsView,
+    props: true, // Permite pasar los parámetros de ruta como props al componente
   },
 ];
 

@@ -1,22 +1,3 @@
-<script>
-export default {
-  name: "PostList",
-  data() {
-    return {
-      posts: [],
-    };
-  },
-  async mounted() {
-    await fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((response) => response.json())
-      .then((data) => {
-        this.posts = data;
-        // console.log(data);
-      });
-  },
-};
-</script>
-
 <template>
   <div class="content">
     <table>
@@ -26,15 +7,54 @@ export default {
         <th>Title</th>
         <th>Body</th>
       </tr>
-      <tr v-for="post in posts" :key="post.id" class="data">
-        <td>{{ post.id }}</td>
-        <td>{{ post.userId }}</td>
-        <td>{{ post.title }}</td>
-        <td>{{ post.body }}</td>
+      <tr v-if="filteredPost" class="data">
+        <td>{{ filteredPost.id }}</td>
+        <td>{{ filteredPost.userId }}</td>
+        <td>{{ filteredPost.title }}</td>
+        <td>{{ filteredPost.body }}</td>
       </tr>
     </table>
   </div>
 </template>
+
+<script>
+import { ref, computed } from "vue";
+import { useRouter } from "vue-router";
+
+export default {
+  name: "PostList",
+  setup() {
+    const posts = ref([]);
+    const router = useRouter();
+    const routeParams = computed(() => router.currentRoute.value.params);
+
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/posts"
+        );
+        if (response.ok) {
+          const data = await response.json();
+          posts.value = data;
+        } else {
+          console.error("Failed to fetch posts:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+    const filteredPost = computed(() => {
+      const postId = routeParams.value.id;
+      return posts.value.find((post) => post.id === Number(postId));
+    });
+
+    fetchPosts();
+
+    return { filteredPost };
+  },
+};
+</script>
 
 <style scoped>
 .content {
