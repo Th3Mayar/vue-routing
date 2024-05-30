@@ -79,11 +79,10 @@ export default {
 <style scoped>
 .content {
   display: flex;
-  border-top: 1px solid #000;
-  border-right: 1px solid #000;
   justify-content: center;
   align-items: center;
 }
+
 .card-title {
   color: #262626;
   font-size: 1.5em;
