@@ -30,13 +30,26 @@
         <span class="item">Social</span>
       </div>
     </router-link>
+    <router-link to="/messages">
+      <div class="menu-item logo-home">
+        <MessageSquareText color="white" :size="30" class="contact-item" />
+        <span class="item">Messages</span>
+      </div>
+    </router-link>
   </nav>
   <router-view />
 </template>
 
 <script>
 import { defineComponent } from "vue";
-import { Home, Verified, Heart, List, Contact } from "lucide-vue-next";
+import {
+  Home,
+  Verified,
+  Heart,
+  List,
+  Contact,
+  MessageSquareText,
+} from "lucide-vue-next";
 
 export default defineComponent({
   name: "PostsView",
@@ -46,6 +59,7 @@ export default defineComponent({
     List,
     Heart,
     Contact,
+    MessageSquareText,
   },
 });
 </script>

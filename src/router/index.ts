@@ -5,6 +5,7 @@ import PostListAllViewVue from "@/views/PostListAllView.vue";
 import AboutViewVue from "../views/AboutView.vue";
 import SocialViewVue from "../views/SocialView.vue";
 import ContactViewVue from "../views/ContactView.vue";
+import MessagesView from "@/views/MessagesView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -37,6 +38,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "post",
     component: PostsView,
     props: true,
+  },
+  {
+    path: "/messages",
+    name: "messages",
+    component: MessagesView,
   },
 ];
 
