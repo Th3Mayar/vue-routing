@@ -1,6 +1,7 @@
 <template>
   <main>
-    <h1>Here is the social page</h1>
+    <h1>Social</h1>
+    <p>Here is the social page</p>
     <div class="up">
       <button
         class="card1"

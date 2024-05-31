@@ -1,6 +1,10 @@
 <template>
   <div class="post">
-    <h1>This is an post</h1>
+    <h1>
+      Post
+      <br />
+      <span class="post-description">This is an post page</span>
+    </h1>
     <button onclick="window.history.back()">
       <svg
         height="16"
@@ -70,5 +74,10 @@ button:hover > svg {
 button:hover {
   box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
   transform: translateY(-2px);
+}
+
+.post-description {
+  font-size: 20px;
+  font-weight: 400;
 }
 </style>

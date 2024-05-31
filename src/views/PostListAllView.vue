@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>All Posts</h1>
+    <h1>Posts</h1>
+    <p>This is an posts page</p>
     <PostListAll :posts="posts" />
   </div>
 </template>
